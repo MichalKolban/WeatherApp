@@ -2,6 +2,7 @@ package pl.kolban.openweather.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import pl.kolban.openweather.utils.Utils;
 
 import java.util.List;
 
@@ -13,15 +14,9 @@ public class WeatherModel {
     @SerializedName("weather")
     @Expose
     private List<Weather> weather = null;
-//    @SerializedName("base")
-//    @Expose
-//    private String base;
     @SerializedName("main")
     @Expose
     private TemperatureModel temperatureModel;
-    @SerializedName("visibility")
-    @Expose
-    private Integer visibility;
     @SerializedName("wind")
     @Expose
     private Wind wind;
@@ -30,7 +25,7 @@ public class WeatherModel {
     private CloudsModel clouds;
     @SerializedName("dt")
     @Expose
-    private Integer dt;
+    private String lastUpdateTimeStamp;
     @SerializedName("sys")
     @Expose
     private SystemModel sys;
@@ -39,13 +34,10 @@ public class WeatherModel {
     private Integer timezone;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Integer cityId;
     @SerializedName("name")
     @Expose
-    private String name;
-    @SerializedName("cod")
-    @Expose
-    private Integer cod;
+    private String cityName;
 
     public CoordinateModel getCoordinateModel() {
         return coordinateModel;
@@ -63,13 +55,15 @@ public class WeatherModel {
         this.weather = weather;
     }
 
-//    public String getBase() {
-//        return base;
-//    }
-//
-//    public void setBase(String base) {
-//        this.base = base;
-//    }
+    public String getLastUpdateTimeStamp() {
+        Utils utils = new Utils();
+        String formatedTime = utils.unixTimeToDateTimeFormat(lastUpdateTimeStamp);
+        return formatedTime;
+    }
+
+    public void setLastUpdateTimeStamp(String lastUpdateTimeStamp) {
+        this.lastUpdateTimeStamp = lastUpdateTimeStamp;
+    }
 
     public TemperatureModel getTemperatureModel() {
         return temperatureModel;
@@ -77,14 +71,6 @@ public class WeatherModel {
 
     public void setTemperatureModel(TemperatureModel main) {
         this.temperatureModel = main;
-    }
-
-    public Integer getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(Integer visibility) {
-        this.visibility = visibility;
     }
 
     public Wind getWind() {
@@ -103,14 +89,6 @@ public class WeatherModel {
         this.clouds = clouds;
     }
 
-    public Integer getDt() {
-        return dt;
-    }
-
-    public void setDt(Integer dt) {
-        this.dt = dt;
-    }
-
     public SystemModel getSys() {
         return sys;
     }
@@ -120,53 +98,43 @@ public class WeatherModel {
     }
 
     public Integer getTimezone() {
-        return timezone;
+        int hours = timezone / 3600;
+        return hours;
     }
 
     public void setTimezone(Integer timezone) {
         this.timezone = timezone;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCityId() {
+        return cityId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 
-    public String getName() {
-        return name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getCod() {
-        return cod;
-    }
-
-    public void setCod(Integer cod) {
-        this.cod = cod;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     @Override
     public String toString() {
-        return "WeatherModelExtra{" +
+        return "WeatherModel{" +
                 "coordinateModel=" + coordinateModel +
                 ", weather=" + weather +
-//                ", base='" + base + '\'' +
                 ", temperatureModel=" + temperatureModel +
-                ", visibility=" + visibility +
                 ", wind=" + wind +
                 ", clouds=" + clouds +
-                ", dt=" + dt +
+                ", lastUpdateTimeStamp='" + lastUpdateTimeStamp + '\'' +
                 ", sys=" + sys +
                 ", timezone=" + timezone +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", cod=" + cod +
+                ", cityId=" + cityId +
+                ", cityName='" + cityName + '\'' +
                 '}';
     }
 }

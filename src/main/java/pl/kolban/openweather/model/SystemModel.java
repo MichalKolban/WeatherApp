@@ -2,40 +2,22 @@ package pl.kolban.openweather.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import pl.kolban.openweather.utils.Utils;
 
 public class SystemModel {
 
-    @SerializedName("type")
-    @Expose
-    private Integer type;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("country")
     @Expose
     private String country;
     @SerializedName("sunrise")
     @Expose
-    private Integer sunrise;
+    private String sunrise;
     @SerializedName("sunset")
     @Expose
-    private Integer sunset;
+    private String sunset;
 
-    public Integer getType() {
-        return type;
-    }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    Utils utils = new Utils();
 
     public String getCountry() {
         return country;
@@ -45,27 +27,27 @@ public class SystemModel {
         this.country = country;
     }
 
-    public Integer getSunrise() {
-        return sunrise;
+    public String  getSunrise() {
+        String formatedSunrise = utils.unitTimeToTimeFormat(sunrise);
+        return formatedSunrise;
     }
 
-    public void setSunrise(Integer sunrise) {
+    public void setSunrise(String sunrise) {
         this.sunrise = sunrise;
     }
 
-    public Integer getSunset() {
-        return sunset;
+    public String getSunset() {
+        String formatedSunset = utils.unitTimeToTimeFormat(sunset);
+        return formatedSunset;
     }
 
-    public void setSunset(Integer sunset) {
+    public void setSunset(String sunset) {
         this.sunset = sunset;
     }
 
     @Override
     public String toString() {
         return "SystemModel{" +
-                "type=" + type +
-                ", id=" + id +
                 ", country='" + country + '\'' +
                 ", sunrise=" + sunrise +
                 ", sunset=" + sunset +
