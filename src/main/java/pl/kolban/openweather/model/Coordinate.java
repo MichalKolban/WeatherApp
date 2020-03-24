@@ -3,7 +3,7 @@ package pl.kolban.openweather.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CoordinateModel {
+public class Coordinate {
 
     @SerializedName("lon")
     @Expose

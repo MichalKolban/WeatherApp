@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.kolban.openweather.model.WeatherModel;
 import pl.kolban.openweather.utils.Utils;
@@ -13,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 @RestController
+@RequestMapping("/rest")
 public class WeatherRest {
 
     Utils utils;
@@ -21,7 +23,6 @@ public class WeatherRest {
     public WeatherRest(Utils utils) {
         this.utils = utils;
     }
-
 
     private final String API = "http://api.openweathermap.org/data/2.5/weather?";
     private final String UNITS = "&units=metric";                                    // possible farenheit later
@@ -35,7 +36,7 @@ public class WeatherRest {
 
         boolean onlyLetters = utils.cityNameValidation(cityname);
 
-        if(onlyLetters){
+        if (onlyLetters && cityname != null ) {
 
             String link = API + "q=" + cityname + UNITS + APPID + LANG;
             URL url = new URL(link);
@@ -47,7 +48,6 @@ public class WeatherRest {
             //  return some error
             return new WeatherModel();
         }
-
     }
 
     // coordinates

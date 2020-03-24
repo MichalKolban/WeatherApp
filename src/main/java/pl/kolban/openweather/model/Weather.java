@@ -11,6 +11,9 @@ public class Weather {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("icon")
+    @Expose
+    private String icon;
 
     public String getMain() {
         return main;
@@ -28,12 +31,20 @@ public class Weather {
         this.description = description;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     @Override
     public String toString() {
         return "Weather{" +
-                ", main='" + main + '\'' +
+                "main='" + main + '\'' +
                 ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
                 '}';
     }
 }

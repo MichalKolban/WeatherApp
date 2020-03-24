@@ -8,6 +8,11 @@ import java.util.Date;
 @Component
 public class Utils {
 
+
+    public Utils() {
+    }
+
+
     public boolean cityNameValidation(String str) {
         if (str != null && str.matches("^[a-zA-Z]*$")) {
             return true;

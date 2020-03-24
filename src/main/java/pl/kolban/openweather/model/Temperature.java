@@ -3,7 +3,7 @@ package pl.kolban.openweather.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TemperatureModel {
+public class Temperature {
     @SerializedName("temp")
     @Expose
     private Double temp;

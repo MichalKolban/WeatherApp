@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import pl.kolban.openweather.utils.Utils;
 
-public class SystemModel {
+public class System {
 
     @SerializedName("country")
     @Expose

@@ -10,25 +10,25 @@ public class WeatherModel {
 
     @SerializedName("coord")
     @Expose
-    private CoordinateModel coordinateModel;
+    private Coordinate coordinate;
     @SerializedName("weather")
     @Expose
     private List<Weather> weather = null;
     @SerializedName("main")
     @Expose
-    private TemperatureModel temperatureModel;
+    private Temperature temperature;
     @SerializedName("wind")
     @Expose
     private Wind wind;
     @SerializedName("clouds")
     @Expose
-    private CloudsModel clouds;
+    private Clouds clouds;
     @SerializedName("dt")
     @Expose
     private String lastUpdateTimeStamp;
     @SerializedName("sys")
     @Expose
-    private SystemModel sys;
+    private System sys;
     @SerializedName("timezone")
     @Expose
     private Integer timezone;
@@ -39,12 +39,12 @@ public class WeatherModel {
     @Expose
     private String cityName;
 
-    public CoordinateModel getCoordinateModel() {
-        return coordinateModel;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
-    public void setCoordinateModel(CoordinateModel coordinateModel) {
-        this.coordinateModel = coordinateModel;
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 
     public List<Weather> getWeather() {
@@ -65,12 +65,12 @@ public class WeatherModel {
         this.lastUpdateTimeStamp = lastUpdateTimeStamp;
     }
 
-    public TemperatureModel getTemperatureModel() {
-        return temperatureModel;
+    public Temperature getTemperature() {
+        return temperature;
     }
 
-    public void setTemperatureModel(TemperatureModel main) {
-        this.temperatureModel = main;
+    public void setTemperature(Temperature main) {
+        this.temperature = main;
     }
 
     public Wind getWind() {
@@ -81,19 +81,19 @@ public class WeatherModel {
         this.wind = wind;
     }
 
-    public CloudsModel getClouds() {
+    public Clouds getClouds() {
         return clouds;
     }
 
-    public void setClouds(CloudsModel clouds) {
+    public void setClouds(Clouds clouds) {
         this.clouds = clouds;
     }
 
-    public SystemModel getSys() {
+    public System getSys() {
         return sys;
     }
 
-    public void setSys(SystemModel sys) {
+    public void setSys(System sys) {
         this.sys = sys;
     }
 
@@ -125,9 +125,9 @@ public class WeatherModel {
     @Override
     public String toString() {
         return "WeatherModel{" +
-                "coordinateModel=" + coordinateModel +
+                "coordinateModel=" + coordinate +
                 ", weather=" + weather +
-                ", temperatureModel=" + temperatureModel +
+                ", temperatureModel=" + temperature +
                 ", wind=" + wind +
                 ", clouds=" + clouds +
                 ", lastUpdateTimeStamp='" + lastUpdateTimeStamp + '\'' +
