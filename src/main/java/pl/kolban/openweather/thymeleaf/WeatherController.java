@@ -1,39 +1,33 @@
 package pl.kolban.openweather.thymeleaf;
 
-import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.kolban.openweather.model.Weather;
 import pl.kolban.openweather.model.WeatherModel;
+import pl.kolban.openweather.service.WeatherService;
 import pl.kolban.openweather.utils.Utils;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.List;
 
 
 @Controller
 public class WeatherController {
 
-    private final String API = "http://api.openweathermap.org/data/2.5/weather?";
-    private final String UNITS = "&units=metric";                                    // possible farenheit later
-    private final String APPID = "&APPID=38dd6ca5a75bd3ea14e326a1cba72197";
-    private final String LANG = "&lang=pl";
-
-    private final String ICON_API = "http://openweathermap.org/img/w/";
-    private final String ICON_END = ".png";
-
+    private final Logger log = LoggerFactory.getLogger(WeatherController.class);
 
     Utils utils;
+    WeatherService service;
+
 
     @Autowired
-    public WeatherController(Utils utils) {
+    public WeatherController(Utils utils, WeatherService service) {
         this.utils = utils;
+        this.service = service;
     }
 
 
@@ -44,39 +38,34 @@ public class WeatherController {
 
     @RequestMapping(value = "/city", method = RequestMethod.POST)
     public String getCityName(Model model, String city) throws IOException {
-        WeatherModel weatherModel = new WeatherModel();
+        WeatherModel weatherModel = service.getByCityName(city);
 
-//        boolean onlyLetters = utils.cityNameValidation(city);
-//        if (onlyLetters && city != null) {
-        String link = API + "q=" + city + UNITS + APPID + LANG;
-        URL url = new URL(link);
-        InputStreamReader reader = new InputStreamReader(url.openStream());
-        weatherModel = new Gson().fromJson(reader, WeatherModel.class);
-        System.out.println(weatherModel.toString());
-//        }
-        weatherModel = addWeatherIcon(weatherModel);
-        model.addAttribute("weatherModel", weatherModel);
-        return "city";
+        if(weatherModel != null) {
+
+            model.addAttribute("weatherModel", weatherModel);
+            return "city";
+        } else {
+            log.error("WeatherController.getCityName(): Wrong parameter : " + city);
+            return "wrongpage";
+        }
+    }
+
+    @RequestMapping(value = "/coordinate", method = RequestMethod.POST)
+    public String getLatitudeAndLongitude(Model model, String lat, String lon) throws IOException {
+        WeatherModel coordinateModel = service.getByCoordinate(lat, lon);
+
+        if(coordinateModel != null) {
+
+            model.addAttribute("coordinateModel", coordinateModel);
+            return "coordinate";
+        } else {
+            log.error("WeatherController.getLatitudeAndLongitude(): Wrong parametes : " + lat + " " + lon);
+            return "wrongpage";
+        }
     }
 
 
 
-    // === private methods ===
-
-
-    private WeatherModel addWeatherIcon(WeatherModel weatherModel) {
-        String iconString = "";
-        List<Weather> weatherList = weatherModel.getWeather();
-        for (Weather w : weatherList) {
-            iconString = w.getIcon();
-        }
-        String imgLink = ICON_API + iconString + ICON_END;
-        for (Weather w : weatherList) {
-            w.setIcon(imgLink);
-        }
-        weatherModel.setWeather(weatherList);
-        return weatherModel;
-    }
 
 
 

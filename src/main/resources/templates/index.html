@@ -9,10 +9,20 @@
 <h1>Hello </h1>
 
 
-<form action="#" th:action="@{/city}"  th:object="${city}" method="post">
-    City Name <input type="text" name="city">
-    <input type="submit" value="Search">
+<!--<form action="#" th:action="@{/city}"  th:object="${city}" method="post">-->
+<!--    City Name <input type="text" name="city">-->
+<!--    <input type="submit" value="Search">-->
+<!--</form>-->
 
+<form action="#" th:action="@{/city}" method="post">
+    City Name <input type="text" th:value="*{city}" name="city">
+    <input type="submit" value="Search">
+</form>
+
+<form action="#" th:action="@{/coordinate}"  method="post">
+    <input type="text" th:value="*{lat}" name="lat"> Latitude
+    <input type="text" th:value="*{lon}" name="lon"> Longitude
+    <button type="submit">GO</button>
 </form>
 
 </body>
