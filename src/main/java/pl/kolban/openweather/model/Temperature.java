@@ -7,9 +7,6 @@ public class Temperature {
     @SerializedName("temp")
     @Expose
     private Double temp;
-    @SerializedName("feels_like")
-    @Expose
-    private Double feelsLike;
     @SerializedName("temp_min")
     @Expose
     private Double tempMin;
@@ -21,7 +18,7 @@ public class Temperature {
     private Double pressure;
     @SerializedName("humidity")
     @Expose
-    private Double humidity;
+    private String humidity;
 
     public Double getTemp() {
         return temp;
@@ -29,14 +26,6 @@ public class Temperature {
 
     public void setTemp(Double temp) {
         this.temp = temp;
-    }
-
-    public Double getFeelsLike() {
-        return feelsLike;
-    }
-
-    public void setFeelsLike(Double feelsLike) {
-        this.feelsLike = feelsLike;
     }
 
     public Double getTempMin() {
@@ -63,11 +52,16 @@ public class Temperature {
         this.pressure = pressure;
     }
 
-    public Double getHumidity() {
+    public String getHumidity() {
+        if (!humidity.contains("%")) {
+            humidity = humidity + " %";
+        } else {
+            return humidity;
+        }
         return humidity;
     }
 
-    public void setHumidity(Double humidity) {
+    public void setHumidity(String humidity) {
         this.humidity = humidity;
     }
 
@@ -75,7 +69,6 @@ public class Temperature {
     public String toString() {
         return "TemperatureModel{" +
                 "temp=" + temp +
-                ", feelsLike=" + feelsLike +
                 ", tempMin=" + tempMin +
                 ", tempMax=" + tempMax +
                 ", pressure=" + pressure +

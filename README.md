@@ -2,7 +2,7 @@
 
 #### Spring based application using public API openweathermap.org
 
-#### Java 8 / Gson / openwethermap API
+#### Java 8 / Gson / openwethermap API / Thymeleaf
 
 ### REST :
 

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Coordinate</title>
 </head>
-<body>
+<body align="center">
 
 
 <h1>Hello Coordinate</h1>
 
-<table border="1">
+<h1 th:text="${weatherModel.cityName}"></h1>
+
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Latitude</td>
@@ -26,7 +28,7 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Main Weather</td>
@@ -45,11 +47,13 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Accual Temp</td>
-        <td>Feels like</td>
+<!--        <td>Feels like</td>-->
+        <td>Pressure</td>
+        <td>Humidity</td>
         <td>Temp Min.</td>
         <td>Temp Max.</td>
     </tr>
@@ -57,7 +61,9 @@
     <tbody>
     <tr th:each="temp : ${coordinateModel.temperature}">
         <td th:text="${temp.temp}"></td>
-        <td th:text="${temp.feelsLike}"></td>
+<!--        <td th:text="${temp.feelsLike}"></td>-->
+        <td th:text="${temp.pressure}"></td>
+        <td th:text="${temp.humidity}"></td>
         <td th:text="${temp.tempMin}"></td>
         <td th:text="${temp.tempMax}"></td>
     </tr>
@@ -66,7 +72,7 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Wind Speed</td>
@@ -83,7 +89,7 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Clouds</td>
@@ -98,7 +104,7 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Last Update</td>
@@ -113,7 +119,7 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Country</td>
@@ -132,7 +138,7 @@
 
 <br>
 
-<table border="1">
+<table border="1" align="center">
     <thead>
     <tr>
         <td>Timezone</td>

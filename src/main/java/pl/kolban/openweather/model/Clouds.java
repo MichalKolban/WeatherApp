@@ -7,13 +7,18 @@ public class Clouds {
 
     @SerializedName("all")
     @Expose
-    private Integer all;
+    private String all;
 
-    public Integer getAll() {
+    public String getAll() {
+        if (!all.contains("%")) {
+            all = all + " %";
+        } else {
+            return all;
+        }
         return all;
     }
 
-    public void setAll(Integer all) {
+    public void setAll(String all) {
         this.all = all;
     }
 

@@ -2,6 +2,7 @@ package pl.kolban.openweather.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import pl.kolban.openweather.utils.Utils;
 
 public class Wind {
 
@@ -10,7 +11,7 @@ public class Wind {
     private Double speed;
     @SerializedName("deg")
     @Expose
-    private Integer deg;
+    private String deg;
 
     public Double getSpeed() {
         return speed;
@@ -20,11 +21,13 @@ public class Wind {
         this.speed = speed;
     }
 
-    public Integer getDeg() {
-        return deg;
+    public String getDeg() {
+        Utils utils = new Utils();
+        String windDegDescription = utils.calculateWindDirection(deg);
+        return windDegDescription;
     }
 
-    public void setDeg(Integer deg) {
+    public void setDeg(String deg) {
         this.deg = deg;
     }
 

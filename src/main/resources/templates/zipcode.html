@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+<h1>Hello City</h1>
+
+<!--<h1 th:text="${weatherModel.cityName}"></h1>-->
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Latitude</td>
+        <td>Londitude</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="coordinate : ${zipCodeModel.coordinate}">
+        <td th:text="${coordinate.lat}"></td>
+        <td th:text="${coordinate.lon}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Main Weather</td>
+        <td>Description</td>
+        <td>Icon</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="weather : ${zipCodeModel.weather}">
+        <td th:text="${weather.main}"></td>
+        <td th:text="${weather.description}"></td>
+        <td><img th:src="${weather.icon}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Accual Temp</td>
+<!--        <td>Feels like</td>-->
+        <td>Pressure</td>
+        <td>Humidity</td>
+        <td>Temp Min.</td>
+        <td>Temp Max.</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="temp : ${zipCodeModel.temperature}">
+        <td th:text="${temp.temp}"></td>
+<!--        <td th:text="${temp.feelsLike}"></td>-->
+        <td th:text="${temp.pressure}"></td>
+        <td th:text="${temp.humidity}"></td>
+        <td th:text="${temp.tempMin}"></td>
+        <td th:text="${temp.tempMax}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Wind Speed</td>
+        <td>Wind Degreese</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="wind : ${zipCodeModel.wind}">
+        <td th:text="${wind.speed}"></td>
+        <td th:text="${wind.deg}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Clouds</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="clouds : ${zipCodeModel.clouds}">
+        <td th:text="${clouds.all}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Last Update</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="last : ${zipCodeModel.lastUpdateTimeStamp}">
+        <td th:text="${last}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Country</td>
+        <td>Sunrise</td>
+        <td>Sunset</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sys : ${zipCodeModel.sys}">
+        <td th:text="${sys.country}"></td>
+        <td th:text="${sys.sunrise}"></td>
+        <td th:text="${sys.sunset}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>Timezone</td>
+        <td>City Id</td>
+        <td>Name</td>
+    </tr>
+    </thead>
+    <tbody>
+    <td th:text="${zipCodeModel.timezone}"></td>
+    <td th:text="${zipCodeModel.cityId}"></td>
+    <td th:text="${zipCodeModel.cityName}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<form method="post" action="/index">         <!-- button Back -->
+    <input type="submit" value="BACK">
+</form>
+
+</body>
+</html>

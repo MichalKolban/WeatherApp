@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Wrong Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="css/wrongpage.css" th:href="@{/css/wrongpage.css}" rel="stylesheet" />
+
 </head>
 <body>
 
-<p>COś POSZło nie tak ELO</p>
+<div class="container">
 
-<img src="images/ghost.png">
+    <div class="ghostbox">
+        <img class="ghostimg" src="images/ghost.png" alt="ghost image">
+    </div>
 
+    <div class="text-box">
+        <p id="number">404</p>
+        <p id="number-text">Something gone wrong. Sorry.</p>
+    </div>
 
-<form method="post" action="/index">         <!-- button Back -->
-    <input type="submit" value="BACK">
-</form>
+    <div class="back-buton">
+        <form method="post" action="/index">
+            <input id="btn" type="submit" value="BACK">
+        </form>
+    </div>
+
+</div>
 
 </body>
+
 </html>
