@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.WeatherHeader {
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+
+/*.container{*/
+/*    background-image: url('images/weatherBackground.jpg');*/
+/*    height: 100%;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*}*/
+
+.search-box {
+    text-align: center;
+    padding-top: 12rem;
+}
+
+input[type="text"]{
+    background: #ffffff;
+    width: 200px;
+    height: 45px;
+    border: none;
+    padding: 0 25px;
+    border-radius: 25px 0 0 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #606060;
+    letter-spacing: 2px;
+}
+
+input[type="submit"]{
+    position: relative;
+    left: -5px;
+    bottom: -1px;
+    width: 110px;
+    height: 45px;
+    border-radius: 0px 25px 25px 0;
+    border: none;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background:  #678ab2;
+    color: white;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+input[type="submit"]:hover{
+    transition: 0.3s;
+    background: #065890;
+    letter-spacing: 2px;
+}

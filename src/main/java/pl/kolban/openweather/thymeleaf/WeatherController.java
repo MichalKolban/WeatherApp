@@ -73,7 +73,6 @@ public class WeatherController {
     }
 
 
-
     @RequestMapping(value = "/data", method = RequestMethod.POST)
     public String getData(Model model, String dataWeb) throws IOException {
 
@@ -90,7 +89,8 @@ public class WeatherController {
             WeatherModel weatherModel = service.getByCityName(city);
             if (weatherModel != null) {
                 model.addAttribute("weatherModel", weatherModel);
-                return "city";
+//                return "city";
+                return "cityWeather";
             } else {
                 log.error("WeatherController.getByCityName(): Wrong parameter : " + city);
                 return "wrongpage";
@@ -101,7 +101,8 @@ public class WeatherController {
             WeatherModel zipCodeModel = service.getByZipCode(zipcode);
             if(zipCodeModel != null) {
                 model.addAttribute("weatherModel", zipCodeModel);
-                return "city";
+//                return "city";
+                return "cityWeather";
             } else {
                 log.error("WeatherController.getByZipCode(): Wrong parametes : " + zipcode);
                 return "wrongpage";
@@ -115,7 +116,8 @@ public class WeatherController {
             WeatherModel coordinateModel = service.getByCoordinate(lat, lon);
             if(coordinateModel != null) {
                 model.addAttribute("weatherModel", coordinateModel);
-                return "city";
+//                return "city";
+                return "cityWeather";
             } else {
                 log.error("WeatherController.getByCoordinate(): Wrong parametes : " + dataLatLon);
                 return "wrongpage";

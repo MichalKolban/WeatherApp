@@ -2,6 +2,7 @@ package pl.kolban.openweather.utils;
 
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -95,4 +96,19 @@ public class Utils {
         }
     }
 
+    public String calculateProperTime(String formatDate, Integer timeZone) {
+
+        int properTimeZone = timeZone - 2; // hardcoded for Poland +2 UTC
+
+        String[] a = formatDate.split(":");
+        int hours = Integer.valueOf(a[0]);
+        int properHours = hours + properTimeZone;
+        if (properHours >= 24) {
+            properHours = properHours - 24;
+        } else if (properHours < 0) {
+            properHours = 24 + hours + properTimeZone;
+        }
+        String proper = properHours + ":" + a[1] + ":" + a[2];
+        return proper;
+    }
 }

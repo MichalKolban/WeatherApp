@@ -1,6 +1,5 @@
 package pl.kolban.openweather.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import pl.kolban.openweather.utils.Utils;
 
@@ -9,34 +8,24 @@ import java.util.List;
 public class WeatherModel {
 
     @SerializedName("coord")
-    @Expose
     private Coordinate coordinate;
     @SerializedName("weather")
-    @Expose
     private List<Weather> weather = null;
     @SerializedName("main")
-    @Expose
     private Temperature temperature;
     @SerializedName("wind")
-    @Expose
     private Wind wind;
     @SerializedName("clouds")
-    @Expose
     private Clouds clouds;
     @SerializedName("dt")
-    @Expose
     private String lastUpdateTimeStamp;
     @SerializedName("sys")
-    @Expose
-    private System sys;
+    private SunSystem sunSystem;
     @SerializedName("timezone")
-    @Expose
     private Integer timezone;
     @SerializedName("id")
-    @Expose
     private Integer cityId;
     @SerializedName("name")
-    @Expose
     private String cityName;
 
     public Coordinate getCoordinate() {
@@ -89,12 +78,12 @@ public class WeatherModel {
         this.clouds = clouds;
     }
 
-    public System getSys() {
-        return sys;
+    public SunSystem getSunSystem() {
+        return sunSystem;
     }
 
-    public void setSys(System sys) {
-        this.sys = sys;
+    public void setSunSystem(SunSystem sunSystem) {
+        this.sunSystem = sunSystem;
     }
 
     public Integer getTimezone() {
@@ -125,13 +114,13 @@ public class WeatherModel {
     @Override
     public String toString() {
         return "WeatherModel{" +
-                "coordinateModel=" + coordinate +
+                "coordinate=" + coordinate +
                 ", weather=" + weather +
-                ", temperatureModel=" + temperature +
+                ", temperature=" + temperature +
                 ", wind=" + wind +
                 ", clouds=" + clouds +
                 ", lastUpdateTimeStamp='" + lastUpdateTimeStamp + '\'' +
-                ", sys=" + sys +
+                ", sunSystem=" + sunSystem +
                 ", timezone=" + timezone +
                 ", cityId=" + cityId +
                 ", cityName='" + cityName + '\'' +

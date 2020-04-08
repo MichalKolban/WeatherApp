@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+</head>
+<body align="center">
+
+<h1>Hello </h1>
+
+
+<form action="#" th:action="@{/data}" method="post">
+    City Name <input type="text" th:value="*{dataWeb}" name="dataWeb">
+    <input type="submit" value="Everything">
+</form>
+
+<br>
+
+<form action="#" th:action="@{/city}" method="post">
+    City Name <input type="text" th:value="*{city}" name="city">
+    <input type="submit" value="Search">
+</form>
+
+<form action="#" th:action="@{/zipcode}" method="post">
+    City Name <input type="text" th:value="*{zipcode}" name="zipcode">
+    <input type="submit" value="ZIPCODE ">
+</form>
+
+<form action="#" th:action="@{/coordinate}"  method="post">
+    <input type="text" th:value="*{lat}" name="lat"> Latitude
+    <input type="text" th:value="*{lon}" name="lon"> Longitude
+    <button type="submit">GO</button>
+</form>
+
+
+
+</body>
+</html>

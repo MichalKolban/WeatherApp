@@ -1,23 +1,16 @@
 package pl.kolban.openweather.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import pl.kolban.openweather.utils.Utils;
 
-public class System {
+public class SunSystem {
 
     @SerializedName("country")
-    @Expose
     private String country;
     @SerializedName("sunrise")
-    @Expose
     private String sunrise;
     @SerializedName("sunset")
-    @Expose
     private String sunset;
 
-
-    Utils utils = new Utils();
 
     public String getCountry() {
         return country;
@@ -27,9 +20,8 @@ public class System {
         this.country = country;
     }
 
-    public String  getSunrise() {
-        String formatedSunrise = utils.unitTimeToTimeFormat(sunrise);
-        return formatedSunrise;
+    public String getSunrise() {
+        return sunrise;
     }
 
     public void setSunrise(String sunrise) {
@@ -37,8 +29,7 @@ public class System {
     }
 
     public String getSunset() {
-        String formatedSunset = utils.unitTimeToTimeFormat(sunset);
-        return formatedSunset;
+        return sunset;
     }
 
     public void setSunset(String sunset) {

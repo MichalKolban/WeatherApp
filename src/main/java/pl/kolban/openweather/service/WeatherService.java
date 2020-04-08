@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.kolban.openweather.model.SunSystem;
 import pl.kolban.openweather.model.Weather;
 import pl.kolban.openweather.model.WeatherModel;
 import pl.kolban.openweather.utils.Utils;
@@ -48,6 +49,8 @@ public class WeatherService {
                 weatherModel = getDataFromOpenWeatherApi(link);
                 System.out.println(weatherModel.toString());
                 weatherModel = addWeatherIcon(weatherModel);
+                weatherModel = calculateSunriseAndSunset(weatherModel);
+
                 return weatherModel;
         } catch (FileNotFoundException ex){
             log.error("WeatcherService.getByCityName() : File not found : String [ " + city + " ]");
@@ -64,6 +67,7 @@ public class WeatherService {
         String link = API + latitude + longitude + UNITS + APPID;
         weatherModel = getDataFromOpenWeatherApi(link);
         weatherModel = addWeatherIcon(weatherModel);
+        weatherModel = calculateSunriseAndSunset(weatherModel);
         return weatherModel;
     }
 
@@ -72,6 +76,7 @@ public class WeatherService {
         String link = API + ZIP_CODE + zipCode + COUNTRY_CODE + UNITS + APPID;
         weatherModel = getDataFromOpenWeatherApi(link);
         weatherModel = addWeatherIcon(weatherModel);
+        weatherModel = calculateSunriseAndSunset(weatherModel);
         return weatherModel;
     }
 
@@ -101,5 +106,19 @@ public class WeatherService {
         return weatherModel;
     }
 
+    private WeatherModel calculateSunriseAndSunset(WeatherModel weatherModel){
 
+        String sunriseFromEndpoint = weatherModel.getSunSystem().getSunrise();
+        String sunsetFromEndpoint = weatherModel.getSunSystem().getSunset();
+        String formatDateForSunrise = utils.unitTimeToTimeFormat(sunriseFromEndpoint);
+        String formatDateForSunset = utils.unitTimeToTimeFormat(sunsetFromEndpoint);
+        String sunriseProperTime = utils.calculateProperTime(formatDateForSunrise, weatherModel.getTimezone());
+        String sunsetProperTime = utils.calculateProperTime(formatDateForSunset, weatherModel.getTimezone());
+
+        SunSystem sun = weatherModel.getSunSystem();
+        sun.setSunrise(sunriseProperTime);
+        sun.setSunset(sunsetProperTime);
+
+        return weatherModel;
+    }
 }

@@ -1,16 +1,13 @@
 package pl.kolban.openweather.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import pl.kolban.openweather.utils.Utils;
 
 public class Wind {
 
     @SerializedName("speed")
-    @Expose
     private Double speed;
     @SerializedName("deg")
-    @Expose
     private String deg;
 
     public Double getSpeed() {

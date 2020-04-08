@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>WeatherCity</title>
 </head>
 <body align="center">
 
@@ -126,9 +126,9 @@
     </thead>
     <tbody>
     <tr>
-        <td th:text="${weatherModel.getSys().getCountry() != null} ? ${weatherModel.getSys().getCountry()} : 'null value!'"></td>
-        <td th:text="${weatherModel.getSys().getSunrise() != null} ? ${weatherModel.getSys().getSunrise()} : 'null value!'"></td>
-        <td th:text="${weatherModel.getSys().getSunset() != null} ? ${weatherModel.getSys().getSunset()} : 'null value!'"></td>
+        <td th:text="${weatherModel.getSunSystem().getCountry() != null} ? ${weatherModel.getSunSystem().getCountry()} : 'null value!'"></td>
+        <td th:text="${weatherModel.getSunSystem().getSunrise() != null} ? ${weatherModel.getSunSystem().getSunrise()} : 'null value!'"></td>
+        <td th:text="${weatherModel.getSunSystem().getSunset() != null} ? ${weatherModel.getSunSystem().getSunset()} : 'null value!'"></td>
     </tr>
     </tbody>
 </table>
