@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.kolban.openweather.model.WeatherModel;
 import pl.kolban.openweather.service.WeatherService;
 import pl.kolban.openweather.utils.Utils;
@@ -35,42 +33,44 @@ public class WeatherController {
         return "index";
     }
 
-    @RequestMapping(value = "/city", method = RequestMethod.POST)
-    public String getCityName(Model model, String city) throws IOException {
-        WeatherModel weatherModel = service.getByCityName(city);
-        if(weatherModel != null) {
-            model.addAttribute("weatherModel", weatherModel);
-            return "city";
-        } else {
-            log.error("WeatherController.getCityName(): Wrong parameter : " + city);
-            return "wrongpage";
-        }
-    }
-
-    @RequestMapping(value = "/coordinate", method = RequestMethod.POST)
-    public String getLatitudeAndLongitude(Model model, String lat, String lon) throws IOException {
-        WeatherModel coordinateModel = service.getByCoordinate(lat, lon);
-        if(coordinateModel != null) {
-            model.addAttribute("coordinateModel", coordinateModel);
-            return "coordinate";
-        } else {
-            log.error("WeatherController.getLatitudeAndLongitude(): Wrong parametes : " + lat + " " + lon);
-            return "wrongpage";
-        }
-    }
+//    @RequestMapping(value = "/city", method = RequestMethod.POST)
+//    public String getCityName(Model model, String city) throws IOException {
+//        WeatherModel weatherModel = service.getByCityName(city);
+//        if(weatherModel != null) {
+//            model.addAttribute("weatherModel", weatherModel);
+//            return "city";
+//        } else {
+//            log.error("WeatherController.getCityName(): Wrong parameter : " + city);
+//            return "wrongpage";
+//        }
+//    }
 
 
-    @RequestMapping(value = "/zipcode", method = RequestMethod.POST)
-    public String getZipCode(Model model, String zipcode) throws IOException {
-        WeatherModel zipCodeModel = service.getByZipCode(zipcode);
-        if(zipCodeModel != null) {
-            model.addAttribute("zipCodeModel", zipCodeModel);
-            return "zipcode";
-        } else {
-            log.error("WeatherController.getZipCode(): Wrong parametes : " + zipcode);
-            return "wrongpage";
-        }
-    }
+
+//    @RequestMapping(value = "/coordinate", method = RequestMethod.POST)
+//    public String getLatitudeAndLongitude(Model model, String lat, String lon) throws IOException {
+//        WeatherModel coordinateModel = service.getByCoordinate(lat, lon);
+//        if(coordinateModel != null) {
+//            model.addAttribute("coordinateModel", coordinateModel);
+//            return "coordinate";
+//        } else {
+//            log.error("WeatherController.getLatitudeAndLongitude(): Wrong parametes : " + lat + " " + lon);
+//            return "wrongpage";
+//        }
+//    }
+
+
+//    @RequestMapping(value = "/zipcode", method = RequestMethod.POST)
+//    public String getZipCode(Model model, String zipcode) throws IOException {
+//        WeatherModel zipCodeModel = service.getByZipCode(zipcode);
+//        if(zipCodeModel != null) {
+//            model.addAttribute("zipCodeModel", zipCodeModel);
+//            return "zipcode";
+//        } else {
+//            log.error("WeatherController.getZipCode(): Wrong parametes : " + zipcode);
+//            return "wrongpage";
+//        }
+//    }
 
 
     @RequestMapping(value = "/data", method = RequestMethod.POST)
@@ -89,7 +89,6 @@ public class WeatherController {
             WeatherModel weatherModel = service.getByCityName(city);
             if (weatherModel != null) {
                 model.addAttribute("weatherModel", weatherModel);
-//                return "city";
                 return "cityWeather";
             } else {
                 log.error("WeatherController.getByCityName(): Wrong parameter : " + city);
@@ -101,7 +100,6 @@ public class WeatherController {
             WeatherModel zipCodeModel = service.getByZipCode(zipcode);
             if(zipCodeModel != null) {
                 model.addAttribute("weatherModel", zipCodeModel);
-//                return "city";
                 return "cityWeather";
             } else {
                 log.error("WeatherController.getByZipCode(): Wrong parametes : " + zipcode);
@@ -116,7 +114,6 @@ public class WeatherController {
             WeatherModel coordinateModel = service.getByCoordinate(lat, lon);
             if(coordinateModel != null) {
                 model.addAttribute("weatherModel", coordinateModel);
-//                return "city";
                 return "cityWeather";
             } else {
                 log.error("WeatherController.getByCoordinate(): Wrong parametes : " + dataLatLon);
@@ -128,7 +125,14 @@ public class WeatherController {
         return "wrongpage";
     }
 
-
-
-
+    @GetMapping("/moreInfo/{city}")
+    public String getMoreInfo(Model model, @PathVariable String city) throws IOException {
+        WeatherModel weatherModel = service.getByCityName(city);
+        if (weatherModel != null) {
+            model.addAttribute("weatherModel", weatherModel);
+            return "moreInfoCityWeather";
+        } else {
+            return "wrongPage";
+        }
+    }
 }

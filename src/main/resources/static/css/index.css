@@ -61,3 +61,7 @@ input[type="submit"]:hover{
     background: #065890;
     letter-spacing: 2px;
 }
+
+#btn:focus {
+    outline: none;
+}

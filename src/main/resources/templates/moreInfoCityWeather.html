@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${weatherModel.cityName}"></title>
+    <link href="css/moreInfoCityWeather.css" th:href="@{/css/moreInfoCityWeather.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="container">
+
+    <table>
+        <tr>
+            <th class="headerTable" colspan="2" th:text="${weatherModel.cityName}"></th>
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            <th>Latitude</th>
+        </tr>
+        <tr>
+            <th th:text="${weatherModel.getCoordinate().getLon() != null} ? ${weatherModel.getCoordinate().getLon()} : 'no data'"></th>
+            <th th:text="${weatherModel.getCoordinate().getLat() != null} ? ${weatherModel.getCoordinate().getLat()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Weather</th>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <th>clear sky</th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Temperature</th>
+        </tr>
+        <tr>
+            <th>Temperature Now</th>
+            <th th:text="${weatherModel.getTemperature().getTemp() != null} ? ${weatherModel.getTemperature().getTemp()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>Min Temperature</th>
+            <th th:text="${weatherModel.getTemperature().getTempMin() != null} ? ${weatherModel.getTemperature().getTempMin()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>Max Temperature</th>
+            <th th:text="${weatherModel.getTemperature().getTempMax() != null} ? ${weatherModel.getTemperature().getTempMax()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>Pressure</th>
+            <th th:text="${weatherModel.getTemperature().getPressure() != null} ? ${weatherModel.getTemperature().getPressure()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Wind</th>
+        </tr>
+        <tr>
+            <th>Wind Speed</th>
+            <th th:text="${weatherModel.getWind().getSpeed() != null} ? ${weatherModel.getWind().getSpeed()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>Wind Direction</th>
+            <th th:text="${weatherModel.getWind().getDeg() != null} ? ${weatherModel.getWind().getDeg()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Clouds</th>
+        </tr>
+        <tr>
+            <th>Clouds</th>
+            <th th:text="${weatherModel.getClouds().getAll() != null} ? ${weatherModel.getClouds().getAll()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Day</th>
+        </tr>
+        <tr>
+            <th>Sunrise</th>
+            <th th:text="${weatherModel.getSunSystem().getSunrise() != null} ? ${weatherModel.getSunSystem().getSunrise()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>Sunset</th>
+            <th th:text="${weatherModel.getSunSystem().getSunset() != null} ? ${weatherModel.getSunSystem().getSunset()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>Timezone</th>
+            <th th:text="${weatherModel.getTimezone() != null} ? ${weatherModel.getTimezone()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Last update</th>
+        </tr>
+        <tr>
+            <th colspan="2" th:text="${weatherModel.getLastUpdateTimeStamp() != null} ? ${weatherModel.getLastUpdateTimeStamp()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th class="headerTable" colspan="2">Country</th>
+        </tr>
+        <tr>
+            <th>Country code</th>
+            <th th:text="${weatherModel.getSunSystem().getCountry() != null} ? ${weatherModel.getSunSystem().getCountry()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>City id</th>
+            <th th:text="${weatherModel.getCityId() != null} ? ${weatherModel.getCityId()} : 'no data'"></th>
+        </tr>
+        <tr>
+            <th>City</th>
+            <th th:text="${weatherModel.getCityName() != null} ? ${weatherModel.getCityName()} : 'no data'"></th>
+        </tr>
+
+    </table>
+
+</div>
+
+<div class="button">
+    <form class="backButton" method="post" action="/index">
+        <!-- button Back -->
+        <input id="btn" type="submit" value="back">
+    </form>
+</div>
+
+
+
+</body>
+
+</html>

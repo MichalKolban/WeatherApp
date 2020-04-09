@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title th:text="${weatherModel.cityName}"></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="css/cityWeather.css" th:href="@{/css/cityWeather.css}" rel="stylesheet" />
+    <link href="css/cityWeather.css" th:href="@{/css/cityWeather.css}" rel="stylesheet"/>
     <script th:src="@{/javascript/clock.js}" type="text/javascript"></script>
 </head>
 <body>
@@ -14,67 +14,71 @@
 
     <div class="MainTable">
 
-<!--        <table border="1px">-->
         <table>
 
             <tr class="cityHeader">
                 <th colspan="2" class="tableCityHeader" th:text="${weatherModel.cityName}"></th>
             </tr>
             <tr class="Temp" th:each="weather : ${weatherModel.weather}">
-                <th class="leftSideTableImg"><img th:src="${weather.getIcon() != null} ? ${weather.getIcon()} : 'null value'"></th>
-                <th class="rightSideTable" th:text="${weatherModel.getTemperature().getTemp() != null} ? ${weatherModel.getTemperature().getTemp()} : 'null value'"></th>
+                <th class="leftSideTableImg"><img
+                        th:src="${weather.getIcon() != null} ? ${weather.getIcon()} : 'no data'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getTemperature().getTemp() != null} ? ${weatherModel.getTemperature().getTemp()} : 'no data'"></th>
             </tr>
             <tr>
                 <th class="leftSideTable">Min Temp.</th>
-                <th class="rightSideTable" th:text="${weatherModel.getTemperature().getTempMin() != null} ? ${weatherModel.getTemperature().getTempMin()} : 'null value'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getTemperature().getTempMin() != null} ? ${weatherModel.getTemperature().getTempMin()} : 'no data'"></th>
             </tr>
             <tr>
                 <th class="leftSideTable">Max Temp</th>
-                <th class="rightSideTable" th:text="${weatherModel.getTemperature().getTempMax() != null} ? ${weatherModel.getTemperature().getTempMax()} : 'null value'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getTemperature().getTempMax() != null} ? ${weatherModel.getTemperature().getTempMax()} : 'no data'"></th>
             </tr>
             <tr>
                 <th class="leftSideTable">Pressure</th>
-                <th class="rightSideTable" th:text="${weatherModel.getTemperature().getPressure() != null} ? ${weatherModel.getTemperature().getPressure()} : 'null value'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getTemperature().getPressure() != null} ? ${weatherModel.getTemperature().getPressure()} : 'no data'"></th>
             </tr>
             <tr>
                 <th class="leftSideTable">Humidity</th>
-                <th class="rightSideTable" th:text="${weatherModel.getTemperature().getHumidity() != null} ? ${weatherModel.getTemperature().getHumidity()} : 'null value'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getTemperature().getHumidity() != null} ? ${weatherModel.getTemperature().getHumidity()} : 'no data'"></th>
+            </tr>
+            <tr>
+                <th class="leftSideTable">Timezone</th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getTimezone() != null} ? ${weatherModel.getTimezone()} : 'no data'"></th>
             </tr>
             <tr>
                 <th class="leftSideTable">Sunrise</th>
-                <th class="rightSideTable" th:text="${weatherModel.getSunSystem().getSunrise() != null} ? ${weatherModel.getSunSystem().getSunrise()} : 'null value!'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getSunSystem().getSunrise() != null} ? ${weatherModel.getSunSystem().getSunrise()} : 'no data'"></th>
             </tr>
             <tr>
                 <th class="leftSideTable">Sunset</th>
-                <th class="rightSideTable" th:text="${weatherModel.getSunSystem().getSunset() != null} ? ${weatherModel.getSunSystem().getSunset()} : 'null value!'"></th>
+                <th class="rightSideTable"
+                    th:text="${weatherModel.getSunSystem().getSunset() != null} ? ${weatherModel.getSunSystem().getSunset()} : 'no data'"></th>
             </tr>
         </table>
     </div>
 
-    <div class="secondTable">
-        <table border="1px">
-            <tr>
-                <th>Latitude</th>
-                <th>Longitude</th>
-            </tr>
-            <tr>
-                <th>14.55</th>
-                <th>-7.99</th>
-            </tr>
 
-        </table>
-    </div>
+</div>
+
+
+<div class="infolink">
+
+    <a class="moreInfoLink" th:href="@{'/moreInfo/' + ${weatherModel.cityName}}">More info</a>
 
 </div>
 
 <div class="button">
-
     <form method="post" action="/index">         <!-- button Back -->
         <input type="submit" value="BACK">
     </form>
 
 </div>
-
 
 
 </body>

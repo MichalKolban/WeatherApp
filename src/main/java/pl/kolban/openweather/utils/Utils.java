@@ -75,28 +75,40 @@ public class Utils {
     }
 
     public String calculateWindDirection(String str){
-        int direction = Integer.valueOf(str);
 
-        if(direction >= 11 && direction <= 79){
-            return "NORTH-EAST (" + direction + ")";
-        } else if (direction >= 80 && direction <= 100) {
-            return "EAST  (" + direction + ")";
-        } else if (direction >= 101 && direction <= 169) {
-            return "SOUTH-EAST (" + direction + ")";
-        } else if (direction >= 170 && direction <= 190) {
-            return "SOUTH (" + direction + ")";
-        } else if (direction >= 191 && direction <= 259) {
-            return "SOUTH-WEST (" + direction + ")";
-        } else if (direction >= 260 && direction <= 280) {
-            return "WEST (" + direction + ")";
-        } else if (direction >= 281 && direction <= 349) {
-            return "NORTH-WEST (" + direction + ")";
-        } else  {
-            return "NORTH";
+        if(str != null) {
+
+            int direction = Integer.valueOf(str);
+
+            if (direction >= 11 && direction <= 79) {
+                return "NORTH-EAST (" + direction + ")";
+            } else if (direction >= 80 && direction <= 100) {
+                return "EAST  (" + direction + ")";
+            } else if (direction >= 101 && direction <= 169) {
+                return "SOUTH-EAST (" + direction + ")";
+            } else if (direction >= 170 && direction <= 190) {
+                return "SOUTH (" + direction + ")";
+            } else if (direction >= 191 && direction <= 259) {
+                return "SOUTH-WEST (" + direction + ")";
+            } else if (direction >= 260 && direction <= 280) {
+                return "WEST (" + direction + ")";
+            } else if (direction >= 281 && direction <= 349) {
+                return "NORTH-WEST (" + direction + ")";
+            } else {
+                return "NORTH";
+            }
+        }else {
+            return null;
         }
     }
 
-    public String calculateProperTime(String formatDate, Integer timeZone) {
+    public String calculateProperTime(String formatDate, String timeZoneString) {
+
+        if(timeZoneString.contains("+")){
+            timeZoneString = timeZoneString.replace('+', ' ').trim();
+        }
+
+        int timeZone = Integer.valueOf(timeZoneString);
 
         int properTimeZone = timeZone - 2; // hardcoded for Poland +2 UTC
 

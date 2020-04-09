@@ -22,7 +22,7 @@ public class WeatherModel {
     @SerializedName("sys")
     private SunSystem sunSystem;
     @SerializedName("timezone")
-    private Integer timezone;
+    private String timezone;
     @SerializedName("id")
     private Integer cityId;
     @SerializedName("name")
@@ -86,12 +86,20 @@ public class WeatherModel {
         this.sunSystem = sunSystem;
     }
 
-    public Integer getTimezone() {
-        int hours = timezone / 3600;
-        return hours;
+    public String getTimezone() {
+
+        if(timezone.contains("-")){
+            int hours = Integer.valueOf(timezone);
+            hours = hours / 3600;
+            return String.valueOf(hours);
+        } else {
+            int hours = Integer.valueOf(timezone);
+            hours = hours / 3600;
+            return "+ " +  String.valueOf(hours);
+        }
     }
 
-    public void setTimezone(Integer timezone) {
+    public void setTimezone(String timezone) {
         this.timezone = timezone;
     }
 
