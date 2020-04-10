@@ -28,12 +28,12 @@ public class WeatherService {
 
     private final String ZIP_CODE = "zip=";
     private final String COUNTRY_CODE = ",pl";
+    private final String CITY_ID = "id=";
 
     private final String ICON_API = "http://openweathermap.org/img/w/";
     private final String ICON_END = ".png";
 
     WeatherModel weatherModel;
-
 
     Utils utils;
 
@@ -42,17 +42,13 @@ public class WeatherService {
         this.utils = utils;
     }
 
-    public WeatherModel getByCityName (String city) throws IOException {
+    public WeatherModel getByCityName(String city) throws IOException {
         try {
 //        String link = API + "q=" + city + UNITS + APPID + LANG;   // with pl language
-                String link = API + "q=" + city + UNITS + APPID;
-                weatherModel = getDataFromOpenWeatherApi(link);
-                System.out.println(weatherModel.toString());
-                weatherModel = addWeatherIcon(weatherModel);
-                weatherModel = calculateSunriseAndSunset(weatherModel);
-
-                return weatherModel;
-        } catch (FileNotFoundException ex){
+            String link = API + "q=" + city + UNITS + APPID;
+            weatherModel = getWeatherModelFromWeb(link);
+            return weatherModel;
+        } catch (FileNotFoundException ex) {
             log.error("WeatcherService.getByCityName() : File not found : String [ " + city + " ]");
         }
         return null;
@@ -65,34 +61,44 @@ public class WeatherService {
         String longitude = "&lon=" + lon;
 //        String link = API + latitude + longitude + UNITS + APPID + LANG;
         String link = API + latitude + longitude + UNITS + APPID;
-        weatherModel = getDataFromOpenWeatherApi(link);
-        weatherModel = addWeatherIcon(weatherModel);
-        weatherModel = calculateSunriseAndSunset(weatherModel);
+        weatherModel = getWeatherModelFromWeb(link);
         return weatherModel;
     }
 
     public WeatherModel getByZipCode(String zipCode) throws IOException {
 //        String link = API + ZIP_CODE + zipCode + COUNTRY_CODE + UNITS + APPID + LANG;
         String link = API + ZIP_CODE + zipCode + COUNTRY_CODE + UNITS + APPID;
-        weatherModel = getDataFromOpenWeatherApi(link);
-        weatherModel = addWeatherIcon(weatherModel);
-        weatherModel = calculateSunriseAndSunset(weatherModel);
+        weatherModel = getWeatherModelFromWeb(link);
         return weatherModel;
     }
 
-
-
+    public WeatherModel getByCityId(int cityIdNumber) throws IOException {
+        String link = API + CITY_ID + cityIdNumber +  UNITS + APPID;
+        weatherModel = getWeatherModelFromWeb(link);
+        return weatherModel;
+    }
 
     // private
 
     private WeatherModel getDataFromOpenWeatherApi(String link) throws IOException {
         URL url = new URL(link);
-        InputStreamReader reader = new InputStreamReader(url.openStream());
+        InputStreamReader reader = null;
+
+        try {
+            reader = new InputStreamReader(url.openStream());
+        } catch (FileNotFoundException e) {
+            log.error("WeatherService.getDataFromOpenWeatherApi : link " + link);
+            return null;
+        }
         weatherModel = new Gson().fromJson(reader, WeatherModel.class);
         return weatherModel;
     }
 
     private WeatherModel addWeatherIcon(WeatherModel weatherModel) {
+
+        if (weatherModel == null) {
+            return null;
+        }
         String iconString = "";
         List<Weather> weatherList = weatherModel.getWeather();
         for (Weather w : weatherList) {
@@ -106,7 +112,11 @@ public class WeatherService {
         return weatherModel;
     }
 
-    private WeatherModel calculateSunriseAndSunset(WeatherModel weatherModel){
+    private WeatherModel calculateSunriseAndSunset(WeatherModel weatherModel) {
+
+        if (weatherModel == null) {
+            return null;
+        }
 
         String sunriseFromEndpoint = weatherModel.getSunSystem().getSunrise();
         String sunsetFromEndpoint = weatherModel.getSunSystem().getSunset();
@@ -121,4 +131,19 @@ public class WeatherService {
 
         return weatherModel;
     }
+
+
+    private WeatherModel getWeatherModelFromWeb(String link) throws IOException {
+        try {
+            weatherModel = getDataFromOpenWeatherApi(link);
+            weatherModel = addWeatherIcon(weatherModel);
+            weatherModel = calculateSunriseAndSunset(weatherModel);
+            return weatherModel;
+        } catch (FileNotFoundException e) {
+            log.error("WeatherService.getWeatherModelFromWeb : link " + link);
+            return null;
+        }
+    }
+
+
 }

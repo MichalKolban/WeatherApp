@@ -123,4 +123,12 @@ public class Utils {
         String proper = properHours + ":" + a[1] + ":" + a[2];
         return proper;
     }
+
+    public boolean cityIdValidation(String dataWeb) {
+        if (dataWeb.matches("[0-9]+") && dataWeb.length() > 6) {
+//            int cityId = Integer.valueOf(dataWeb);
+            return true;
+        }
+        return false;
+    }
 }
