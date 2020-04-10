@@ -6,7 +6,6 @@
     <title>Weather App</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="css/index.css" th:href="@{/css/index.css}" rel='stylesheet' />
-<!--    <script th:src="@{/javascript/clock.js}" type="text/javascript"></script>-->
 </head>
 <body th:style="'background: url(images/weatherBackground.jpg)'">
 
@@ -15,9 +14,11 @@
 <div class="container">
 
     <div class="search-box">
+        <p class="alpha">alpha version</p>
         <p class="WeatherHeader">Weather App</p>
+        <p class="descript">city, latitude and longitude, zip-code</p>
         <form class="formAction" action="#" th:action="@{/data}" method="post">
-            <input type="text" th:value="*{dataWeb}" name="dataWeb">
+            <input type="text" th:value="*{dataWeb}" name="dataWeb" required placeholder="city..." >
             <input id="btn" type="submit" value="Search">
         </form>
     </div>

@@ -10,9 +10,21 @@ body, html {
 .WeatherHeader {
     font-size: 4rem;
     color: white;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
+.alpha {
+    color: whitesmoke;
+    letter-spacing: 2px;
+}
+
+
+.descript {
+    color: whitesmoke;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+}
 
 /*.container{*/
 /*    background-image: url('images/weatherBackground.jpg');*/
