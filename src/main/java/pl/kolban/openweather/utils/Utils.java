@@ -103,6 +103,7 @@ public class Utils {
     }
 
     public String calculateProperTime(String formatDate, String timeZoneString) {
+        int properTimeZone = 0;
 
         if(timeZoneString.contains("+")){
             timeZoneString = timeZoneString.replace('+', ' ').trim();
@@ -110,7 +111,9 @@ public class Utils {
 
         int timeZone = Integer.valueOf(timeZoneString);
 
-        int properTimeZone = timeZone - 2; // hardcoded for Poland +2 UTC
+        if(timeZone != 2) {
+            properTimeZone = timeZone - 2; // hardcoded for Poland +2 UTC
+        }
 
         String[] a = formatDate.split(":");
         int hours = Integer.valueOf(a[0]);
@@ -126,7 +129,6 @@ public class Utils {
 
     public boolean cityIdValidation(String dataWeb) {
         if (dataWeb.matches("[0-9]+") && dataWeb.length() > 6) {
-//            int cityId = Integer.valueOf(dataWeb);
             return true;
         }
         return false;
