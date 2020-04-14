@@ -2,16 +2,25 @@
 
 #### Spring based application using public API openweathermap.org
 
-#### Java 8 / Gson / openwethermap API / Thymeleaf
+##### Java 8 / Gson / openwethermap API / Thymeleaf / Html / CSS
 
-### REST :
+Note: Application doesn't support polish language. Type Krakow instead of Kraków
+
+
+#### Live demo :
+ 
+ https://mk-openweather.herokuapp.com/
+
+
+
+##### REST :
 
 ##### @GET
 
-###### `/city/{cityname}` - eg Szczecin, Moskwa, Krakow, California
+###### `/rest/city/{cityname}` - eg Szczecin, Moskwa, Krakow, California
 
 
-###### `/coordinate/{lat}/{lon}` - coordinates like e.g. {14,55/53,43} = Szczecin 
+###### `/rest/coordinate/{lat}/{lon}` - coordinates like e.g. {14,55/53,43} = Szczecin 
 
 
-###### `/zipcode/{zipNumber}/{countryCode}` eg - /70-366/pl
+###### `/rest/zipcode/{zipNumber}/{countryCode}` eg - /70-366/pl

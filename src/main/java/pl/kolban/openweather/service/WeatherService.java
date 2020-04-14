@@ -22,9 +22,8 @@ public class WeatherService {
     private final Logger log = LoggerFactory.getLogger(WeatherService.class);
 
     private final String API = "http://api.openweathermap.org/data/2.5/weather?";
-    private final String UNITS = "&units=metric";                                    // possible farenheit later
+    private final String UNITS = "&units=metric";
     private final String APPID = "&APPID=38dd6ca5a75bd3ea14e326a1cba72197";
-    private final String LANG = "&lang=pl";
 
     private final String ZIP_CODE = "zip=";
     private final String COUNTRY_CODE = ",pl";
@@ -44,7 +43,6 @@ public class WeatherService {
 
     public WeatherModel getByCityName(String city) throws IOException {
         try {
-//        String link = API + "q=" + city + UNITS + APPID + LANG;   // with pl language
             String link = API + "q=" + city + UNITS + APPID;
             weatherModel = getWeatherModelFromWeb(link);
             return weatherModel;
@@ -59,14 +57,12 @@ public class WeatherService {
         // valid data
         String latitude = "lat=" + lat;
         String longitude = "&lon=" + lon;
-//        String link = API + latitude + longitude + UNITS + APPID + LANG;
         String link = API + latitude + longitude + UNITS + APPID;
         weatherModel = getWeatherModelFromWeb(link);
         return weatherModel;
     }
 
     public WeatherModel getByZipCode(String zipCode) throws IOException {
-//        String link = API + ZIP_CODE + zipCode + COUNTRY_CODE + UNITS + APPID + LANG;
         String link = API + ZIP_CODE + zipCode + COUNTRY_CODE + UNITS + APPID;
         weatherModel = getWeatherModelFromWeb(link);
         return weatherModel;

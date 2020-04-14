@@ -102,35 +102,45 @@ public class Utils {
         }
     }
 
-    public String calculateProperTime(String formatDate, String timeZoneString) {
-        int properTimeZone = 0;
-
-        if(timeZoneString.contains("+")){
-            timeZoneString = timeZoneString.replace('+', ' ').trim();
-        }
-
-        int timeZone = Integer.valueOf(timeZoneString);
-
-        if(timeZone != 2) {
-            properTimeZone = timeZone - 2; // hardcoded for Poland +2 UTC
-        }
-
-        String[] a = formatDate.split(":");
-        int hours = Integer.valueOf(a[0]);
-        int properHours = hours + properTimeZone;
-        if (properHours >= 24) {
-            properHours = properHours - 24;
-        } else if (properHours < 0) {
-            properHours = 24 + hours + properTimeZone;
-        }
-        String proper = properHours + ":" + a[1] + ":" + a[2];
-        return proper;
-    }
-
     public boolean cityIdValidation(String dataWeb) {
         if (dataWeb.matches("[0-9]+") && dataWeb.length() > 6) {
             return true;
         }
         return false;
     }
+
+    public String calculateProperTime(String formatDate, String timeZoneString){
+
+        int timeZone = getIntegerTimeZone(timeZoneString);
+        timeZone = substractFromTimeZone(timeZone);      // uncomment only if you running on local machine in Poland
+
+        String[] a = formatDate.split(":");
+        int hours = Integer.valueOf(a[0]);
+        int properHours = hours + timeZone;
+        if (properHours >= 24) {
+            properHours = properHours - 24;
+        } else if (properHours < 0) {
+            properHours = 24 + hours + timeZone;
+        }
+        String proper = properHours + ":" + a[1] + ":" + a[2];
+        return proper;
+
+    }
+
+    private int getIntegerTimeZone(String timeZoneString){
+        if(timeZoneString.contains("+")){
+            timeZoneString = timeZoneString.replace('+', ' ').trim();
+        }
+        int timeZone = Integer.valueOf(timeZoneString);
+        return timeZone;
+    }
+
+    private int substractFromTimeZone(int timeZone) {
+        if (timeZone == 2) {
+            return 0;
+        } else {
+            return timeZone - 2;
+        }
+    }
+
 }
