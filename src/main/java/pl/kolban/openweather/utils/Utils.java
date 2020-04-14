@@ -112,7 +112,7 @@ public class Utils {
     public String calculateProperTime(String formatDate, String timeZoneString){
 
         int timeZone = getIntegerTimeZone(timeZoneString);
-        timeZone = substractFromTimeZone(timeZone);      // uncomment only if you running on local machine in Poland
+//        timeZone = substractFromTimeZone(timeZone);      // uncomment only if you running on local machine in Poland
 
         String[] a = formatDate.split(":");
         int hours = Integer.valueOf(a[0]);
